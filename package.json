@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon index.js",
+    "start": "npx nodemon src/index.js",
     "stop": "fuser -k 5000/tcp"
   },
   "keywords": [],
