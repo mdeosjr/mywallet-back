@@ -1,20 +1,9 @@
 import db from '../db.js';
 
 export async function getRecords(req, res) {
-    const { authorization } = req.headers;
-    const token = authorization?.replace('Bearer ', '');
-
-    if(!token) {
-        return res.status(401).send("Erro token")
-    };
+    const session = res.locals.session;
 
     try {
-        const session = await db.collection('sessions').findOne({ token });
-
-        if (!session) {
-            return res.status(401).send("Erro sessão")
-        };
-
         const user = await db.collection('registry').find({ userID: session.userID }).toArray();
 
         if (!user) {
@@ -28,21 +17,10 @@ export async function getRecords(req, res) {
 };
 
 export async function postRecords(req, res) {
-    const { authorization } = req.headers;
-    const token = authorization?.replace('Bearer ', '');
+    const session = res.locals.session;
     const registryData = req.body;
 
-    if(!token) {
-        return res.status(401).send("Erro token")
-    };
-
-     try {
-        const session = await db.collection('sessions').findOne({ token });
-
-        if (!session) {
-            return res.status(402).send("Erro sessão")
-        };
-
+    try {
         await db.collection('registry').insertOne({ ...registryData, userID: session.userID });
         res.sendStatus(201) 
     } catch {
