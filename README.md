@@ -6,7 +6,7 @@ An web application, where you can control your money better, including the entry
 </br>Made with React and styled-components.
 
 Link: https://mywallet-front-six.vercel.app
-Repository: https://github.com/mdeosjr/mywallet-front
+</br>Repository: https://github.com/mdeosjr/mywallet-front
 
 ## Technologies
 
